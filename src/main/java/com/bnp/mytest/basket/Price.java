@@ -21,6 +21,18 @@ public class Price implements PriceCalculator {
                 booksSetFactory.getDifferentBooksSetsWithMaxTotalDiscount(basketItems);
 
         double totalPrice =0.0;
+        double newPrice =0.0;
+
+        for (BooksSet booksSet:setsOfDifferentBooks){
+            for (Book book:booksSet.getBooks()) {
+                newPrice += book.getPrice();
+            }
+
+            newPrice = newPrice * (1.0 - (booksSet.getDiscount()/100.0));
+            totalPrice +=newPrice;
+            newPrice = 0;
+        }
+
         return totalPrice;
     }
 }
